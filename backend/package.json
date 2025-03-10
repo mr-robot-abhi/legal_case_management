@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --loader ts-node/esm server.ts",
     "build": "tsc",
-    "start": "node --loader ts-node/esm dist/server.js",
+    "start": "node --loader ts-node/esm dist/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
