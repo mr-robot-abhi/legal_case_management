@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🔹 Custom styles */
+body {
+  @apply bg-gray-50 text-gray-900 font-sans;
+}
+
+/* 🔹 Reusable Button Styling */
+.btn {
+  @apply px-4 py-2 rounded-md text-white transition duration-300;
+}
+
+/* 🔹 Primary Button */
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700;
+}
+
+/* 🔹 Secondary Button */
+.btn-secondary {
+  @apply bg-gray-600 hover:bg-gray-700;
+}
+
+/* 🔹 Card Styling */
+.card {
+  @apply p-4 bg-white shadow-md rounded-lg;
+}
