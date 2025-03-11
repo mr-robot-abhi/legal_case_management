@@ -1,29 +1,13 @@
-import { Request, Response } from "express";
-import Message from "../models/Message";
-import { sendNotification } from "../config/firebase";
+import express from "express";
+import Chat from "../models/Message";
+import { sendNotification } from "../config/firebase"; // Ensure this is not conflicting
 
-export const sendMessage = async (req: Request, res: Response) => {
-  const { sender, receiver, message, caseId } = req.body;
-  
-  try {
-    const newMessage = await Message.create({ sender, receiver, message, caseId });
-
-    // Send Firebase Notification to receiver
-    sendNotification(receiver, "New Message", `You have a new message: "${message}"`);
-
-    res.status(201).json(newMessage);
-  } catch (error) {
-    res.status(500).json({ message: "Error sending message", error });
-  }
+const sendMessage = async (req: express.Request, res: express.Response) => {
+  // Logic to send a message
 };
 
-export const getMessages = async (req: Request, res: Response) => {
-  const { caseId } = req.params;
-
-  try {
-    const messages = await Message.find({ caseId }).populate("sender receiver", "name email");
-    res.json(messages);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching messages", error });
-  }
+const getMessages = async (req: express.Request, res: express.Response) => {
+  // Logic to get messages
 };
+
+export { sendMessage, getMessages };

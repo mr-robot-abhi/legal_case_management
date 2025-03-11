@@ -4,6 +4,6 @@ import { sendMessage, getMessages } from "../controllers/chatController";
 const router = express.Router();
 
 router.post("/send", sendMessage);
-router.get("/:caseId", getMessages);
+router.get("/messages", getMessages);
 
 export default router;

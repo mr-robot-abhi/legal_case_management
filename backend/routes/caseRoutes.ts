@@ -3,8 +3,8 @@ import { createCase, getCases, assignLawyer } from "../controllers/caseControlle
 
 const router = express.Router();
 
-router.post("/create", createCase);
+router.post("/", createCase);
 router.get("/", getCases);
-router.post("/assign-lawyer", assignLawyer);
+router.post("/:id/assign", assignLawyer);
 
 export default router;

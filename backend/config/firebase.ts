@@ -1,26 +1,18 @@
 import admin from "firebase-admin";
-import dotenv from "dotenv";
 
-dotenv.config();
+const serviceAccount = require("../path/to/serviceAccountKey.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-  }),
+  credential: admin.credential.cert(serviceAccount),
 });
 
-export const sendNotification = async (token: string, title: string, body: string) => {
-  try {
-    await admin.messaging().send({
-      token,
-      notification: { title, body },
-    });
-    console.log("📩 Notification sent");
-  } catch (error) {
-    console.error("❌ Failed to send notification", error);
-  }
-};
+export const sendNotification = (token: string, message: { title: string; body: string }): Promise<admin.messaging.BatchResponse> => {
+  const payload = {
+    notification: {
+      title: message.title,
+      body: message.body,
+    },
+  };
 
-export default admin;
+  return admin.messaging().sendMulticast({ tokens: [token], notification: payload.notification });
+};
